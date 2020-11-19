@@ -15,3 +15,15 @@ module "gitlab_ec_redis" {
 
   elasticache_subnet_group_name = var.gitlab_elasticache_subnet_group_name
 }
+
+resource "aws_ssm_parameter" "gitlab_elasticache_endpoint" {
+  name        = "/gitlab/${var.environment}/redis/endpoint"
+  description = "The redis endpoint"
+  type        = "String"
+  value       = module.gitlab_ec_redis.endpoint
+
+  tags = {
+    Terraform   = "true"
+    Environment = var.environment
+  }
+}
