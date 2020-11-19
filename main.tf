@@ -27,3 +27,15 @@ resource "aws_ssm_parameter" "gitlab_elasticache_endpoint" {
     Environment = var.environment
   }
 }
+
+resource "aws_ssm_parameter" "gitlab_elasticache_address" {
+  name        = "/gitlab/${var.environment}/redis/address"
+  description = "The redis address"
+  type        = "String"
+  value       = module.gitlab_ec_redis.host
+
+  tags = {
+    Terraform   = "true"
+    Environment = var.environment
+  }
+}
