@@ -2,10 +2,13 @@ module "gitlab_ec_redis" {
   source  = "cloudposse/elasticache-redis/aws"
   version = "0.25.0"
 
-  name    = "gitlab-redis"
+  environment = var.environment
+
+  name    = "gitlab-${var.environment}-redis"
   vpc_id = var.gitlab_vpc_id
 
-  environment = var.environment
+  engine_version = "5.0.6"
+  family         = "redis5.0"
 
   use_existing_security_groups = true
   existing_security_groups     = var.gitlab_redis_sg_ids
