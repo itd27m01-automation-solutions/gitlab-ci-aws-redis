@@ -10,6 +10,8 @@ module "gitlab_ec_redis" {
   engine_version = "5.0.6"
   family         = "redis5.0"
 
+  transit_encryption_enabled = false
+
   use_existing_security_groups = true
   existing_security_groups     = var.gitlab_redis_sg_ids
 
